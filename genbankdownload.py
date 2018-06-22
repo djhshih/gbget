@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # A short script to download nucleotide sequences from genbank.
 #
 # Copyright (c) 2009, Simon J. Greenhill <simon@simon.net.nz>
