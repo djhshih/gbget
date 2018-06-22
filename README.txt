@@ -1,14 +1,12 @@
-genbank-download is a small script to download nucleotide sequences from genbank 
-using an accession number.
+`gbget.py` downloads nucleotide sequences from GenBank.
 
 Usage:
 
-python genbankdownload.py [options] ACCESSION-NUMBER
+    python gbget.py [options] ACCESSION-NUMBER
 
-e.g.
-    python genbankdownload.py J01415
-    python genbankdownload.py J01415 > mysequence.xml
-    python genbankdownload.py -m fasta J01415 > mysequence.fasta
-    
-    
-(c) Simon J. Greenhill 2009. Contact me at <simon@simon.net.nz>
+Example:
+
+    python gbget.py J01415
+    python gbget.py J01415 > mysequence.gb
+    python gbget.py -m fasta J01415 > mysequence.fasta
+   

@@ -15,7 +15,7 @@
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
 #
-# 3. Neither the name of genbank-download nor the names of its contributors
+# 3. Neither the name of gbget nor the names of its contributors
 #    may be used to endorse or promote products derived from this software
 #    without specific prior written permission.
 #
@@ -32,25 +32,25 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 """
-Download nucleotide sequences from genbank using an accession number
+Download nucleotide sequences from GenBank.
 
 (c) Simon Greenhill, 2009
 
 Usage:
 
-python genbankdownload.py [options] ACCESSION-NUMBER
+python gbget.py [options] ACCESSION-NUMBER
 
 e.g.
-python genbankdownload.py J01415.1
-python genbankdownload.py J01415.1 > mysequence.gb
-python genbankdownload.py -m fasta J01415.1 > mysequence.fasta
+python gbget.py J01415.1
+python gbget.py J01415.1 > mysequence.gb
+python gbget.py -m fasta J01415.1 > mysequence.fasta
 
 """
-__author__ = 'Simon Greenhill <simon@simon.net.nz>'
-__version__ = "0.5"
+__author__ = 'David J. H. Shih <djh.shih@gmail.com>'
+__version__ = "0.1"
 
-_toolname = 'genbank-download'
-_email = 'dev@simon.net.nz'
+_toolname = 'gbget'
+_email = 'djh.shih@gmail.com'
 
 import sys
 import urllib.parse
@@ -86,7 +86,7 @@ def get_accession(query, database, rettype):
     url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?'
     url = url + urllib.parse.urlencode(params)
     data = urllib.request.urlopen(url).read()
-    return data
+    return data.decode("utf-8")
 
 
 if __name__ == '__main__':
@@ -110,4 +110,5 @@ if __name__ == '__main__':
         quit()
 
     citation = get_accession(acc, _database, options.rettype)
-    print(citation.decode("utf-8"))
+    print(citation)
+

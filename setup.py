@@ -1,21 +1,20 @@
 from distutils.core import setup
 import sys
 
-sys.path.append('genbank-download')
-import genbankdownload
+sys.path.append('gbget')
+import gbget
 
 
-setup(name='genbank-download',
-      version='0.5',
-      author='Simon Greenhill',
-      author_email='simon@simon.net.nz',
-      url='http://simon.net.nz/code/genbank-download/',
-      download_url='http://bitbucket.org/simongreenhill/genbank-download/',
-      description='a small script to download nucleotide sequences from genbank using an accession number.',
-      long_description=genbankdownload.__doc__,
-      #package_dir={'': ''},
-      py_modules=['genbankdownload'],
-      provides=['genbankdownload'],
+setup(name='gbget',
+      version='0.1',
+      author='David J. H. Shih',
+      author_email='djh.shih@gmail.com',
+      url='http://github.com/djhshih/gbget/',
+      description='Download nucleotide sequences from genbank. Based on original work by Simon Greenhill <simon@simon.net.nz>',
+      long_description=gbget.__doc__,
+      scripts=['gbget.py'],
+      py_modules=['gbget'],
+      provides=['gbget'],
       keywords='genbank genetics mitchondria bioinformatics fasta',
       license="BSD License",
       classifiers=[
