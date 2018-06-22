@@ -42,7 +42,7 @@ python genbankdownload.py [options] ACCESSION-NUMBER
 
 e.g.
 python genbankdownload.py J01415.1
-python genbankdownload.py J01415.1 > mysequence.xml
+python genbankdownload.py J01415.1 > mysequence.gb
 python genbankdownload.py -m fasta J01415.1 > mysequence.fasta
 
 """
@@ -53,10 +53,11 @@ _toolname = 'genbank-download'
 _email = 'dev@simon.net.nz'
 
 import sys
-import urllib
+import urllib.parse
+import urllib.request
 
 _database = "nucleotide"
-_rettypes = ('native', 'fasta', 'gb', 'xml')
+_rettypes = ('native', 'xml', 'fasta', 'gb')
 
 
 def get_accession(query, database, rettype):
@@ -72,6 +73,9 @@ def get_accession(query, database, rettype):
 
     """
 
+    if rettype == "xml":
+        rettype = "native"
+
     params = {
         'db': database,
         'tool': _toolname,
@@ -80,8 +84,8 @@ def get_accession(query, database, rettype):
         'rettype': rettype,
     }
     url = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?'
-    url = url + urllib.urlencode(params)
-    data = urllib.urlopen(url).read()
+    url = url + urllib.parse.urlencode(params)
+    data = urllib.request.urlopen(url).read()
     return data
 
 
@@ -90,7 +94,7 @@ if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser(usage="usage: %prog [-t xxxx] accessnumber")
     parser.add_option("-t", "--rettype",
-        dest="rettype", action="store", default="xml",
+        dest="rettype", action="store", default="native",
         help="Return type of data. Valid values are %s" % ",".join(_rettypes))
     options, args = parser.parse_args()
 
@@ -102,8 +106,8 @@ if __name__ == '__main__':
 
     # validate input
     if options.rettype not in _rettypes:
-        print "Error: rettype %s is not a valid rettype" % options.rettype
+        print("Error: rettype %s is not a valid rettype" % options.rettype)
         quit()
 
     citation = get_accession(acc, _database, options.rettype)
-    print citation
+    print(citation.decode("utf-8"))
