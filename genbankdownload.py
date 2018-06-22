@@ -94,7 +94,7 @@ if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser(usage="usage: %prog [-t xxxx] accessnumber")
     parser.add_option("-t", "--rettype",
-        dest="rettype", action="store", default="native",
+        dest="rettype", action="store", default="gb",
         help="Return type of data. Valid values are %s" % ",".join(_rettypes))
     options, args = parser.parse_args()
 
