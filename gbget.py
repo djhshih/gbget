@@ -50,7 +50,6 @@ __author__ = 'David J. H. Shih <djh.shih@gmail.com>'
 __version__ = "0.1"
 
 _toolname = 'gbget'
-_email = 'djh.shih@gmail.com'
 
 import sys
 import urllib.parse
@@ -79,7 +78,6 @@ def get_accession(query, database, rettype):
     params = {
         'db': database,
         'tool': _toolname,
-        'email': _email,
         'id': query,
         'rettype': rettype,
     }
